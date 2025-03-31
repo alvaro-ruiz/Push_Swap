@@ -6,7 +6,7 @@
 /*   By: aruiz-bl <aruiz-bl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:02:18 by aruiz-bl          #+#    #+#             */
-/*   Updated: 2025/03/31 14:03:47 by aruiz-bl         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:28:15 by aruiz-bl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	free_stack(t_stack **stack)
 	t_stack	*tmp;
 
 	if (!stack)
-		return ;
+		return;
+		
 	current = *stack;
 	while (current)
 	{

@@ -6,7 +6,7 @@
 /*   By: aruiz-bl <aruiz-bl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:19:18 by aruiz-bl          #+#    #+#             */
-/*   Updated: 2025/03/26 15:50:37 by aruiz-bl         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:32:12 by aruiz-bl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	push_swap(t_stack *a, t_stack *b)
 {
+	if (!a)
+		return (1);
 	while (ft_lstsize(&a) > 3)
 		pb(&a, &b);
 	sort_a(&a);

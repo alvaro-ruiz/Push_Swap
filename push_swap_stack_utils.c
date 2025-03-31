@@ -6,7 +6,7 @@
 /*   By: aruiz-bl <aruiz-bl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:21:42 by aruiz-bl          #+#    #+#             */
-/*   Updated: 2025/03/31 13:59:53 by aruiz-bl         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:30:32 by aruiz-bl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,30 @@
 
 int	ft_lstadd_back(t_stack **lst, int num, int poss)
 {
-    t_stack *tmp;
-    t_stack *new;
+	t_stack *tmp;
+	t_stack *new;
 
-    new = malloc(sizeof(t_stack));
-    if (!new)
+	if (!lst)
+		return (0);
+	new = malloc(sizeof(t_stack));
+	if (!new)
         return (0);
     new->num = num;
     new->pos = poss;
     new->cost = 0;
     new->target = NULL;
     new->next = NULL;
-
-    if (!*lst) // Si la lista está vacía, el nuevo nodo es la cabeza
+    if (!*lst)
     {
         *lst = new;
         return (1);
     }
-
     tmp = ft_lstlast(*lst);
-    if (!tmp) // Esto evita un error si ft_lstlast falla
+    if (!tmp)
+    {
+        free(new);
         return (0);
+    }
     tmp->next = new;
     return (1);
 }
@@ -97,10 +100,12 @@ void ft_lstclear(t_stack **lst)
 {
     t_stack *temp;
 
+    if (!lst || !(*lst))
+        return;
+        
     while (*lst)
     {
         temp = (*lst)->next;
-        free((*lst)->target);
         free(*lst);
         *lst = temp;
     }

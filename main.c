@@ -6,7 +6,7 @@
 /*   By: aruiz-bl <aruiz-bl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:13:38 by aruiz-bl          #+#    #+#             */
-/*   Updated: 2025/03/31 13:30:40 by aruiz-bl         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:29:43 by aruiz-bl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_stack	*complete_stack(char **argv, int argc)
 
 	i = 1;
 	a = ft_stacknew(ft_atoi(argv[0]), 0);
+	if (!a)  // Verificar si hay error en la creación del primer nodo
+		return (NULL);
 	if (argc == 2)
 		argc = 1;
 	else
@@ -46,8 +48,15 @@ t_stack	*complete_stack(char **argv, int argc)
 	while (argv[i])
 	{
 		if (exit_error(&a, argv[i]))
-			error_free (&a, argv, argc);
-		ft_lstadd_back(&a, ft_atoi(argv[i]), i - 1);
+		{
+			error_free(&a, argv, argc);
+			return (NULL);  // Agregamos return para evitar continuar si hay error
+		}
+		if (!ft_lstadd_back(&a, ft_atoi(argv[i]), i))  // Verificar si hay error
+		{
+			error_free(&a, argv, argc);
+			return (NULL);
+		}
 		i++;
 	}
 	if (argc == 1)
@@ -89,10 +98,18 @@ int	main(int argc, char **argv)
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
 	else if (argc == 2)
+	{
 		argv = ft_split(argv[1], ' ');
-	if (!argv)
-		return (0);
+		if (!argv)
+			return (1);
+	}
 	a = complete_stack(argv, argc);
+	if (!a)
+	{
+		if (argc == 2)
+			free_argv(argv);
+		return (1);
+	}
 	next(&a, &b);
 	free_stack(&a);
 	free_stack(&b);
