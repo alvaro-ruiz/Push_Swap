@@ -6,7 +6,7 @@
 /*   By: aruiz-bl <aruiz-bl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:02:18 by aruiz-bl          #+#    #+#             */
-/*   Updated: 2025/03/27 13:45:52 by aruiz-bl         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:03:47 by aruiz-bl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_argv(char **argv)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	if (NULL == argv || NULL == *argv)
 		return ;
 	while (argv[i])

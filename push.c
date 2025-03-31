@@ -6,32 +6,25 @@
 /*   By: aruiz-bl <aruiz-bl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:00:54 by aruiz-bl          #+#    #+#             */
-/*   Updated: 2025/03/26 15:44:59 by aruiz-bl         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:00:47 by aruiz-bl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_stack **sale, t_stack **entra)
+void    push(t_stack **sale, t_stack **entra)
 {
-	t_stack	*tmp;
+    t_stack *tmp;
 
-	if (!*entra)
-	{
-		*entra = ft_stacknew((*sale)->num, 0);
-		*sale = (*sale)->next;
-		ft_stack_poss(*sale, -1);
-	}
-	else
-	{
-		tmp = *sale;
-		*sale = (*sale)->next;
-		tmp->pos = -1;
-		tmp->next = *entra;
-		*entra = tmp;
-		ft_stack_poss(*sale, -1);
-		ft_stack_poss(*entra, +1);
-	}
+    if (!*sale)
+        return;
+    tmp = *sale;
+    *sale = (*sale)->next;
+    tmp->pos = -1; 
+    tmp->next = *entra;
+    *entra = tmp;
+    ft_stack_poss(*sale, -1);
+    ft_stack_poss(*entra, +1);
 }
 
 void	pa(t_stack **a, t_stack **b)

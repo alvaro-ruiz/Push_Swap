@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aruiz-bl <aruiz-bl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 11:57:30 by aruiz-bl          #+#    #+#             */
-/*   Updated: 2025/03/31 13:44:39 by aruiz-bl         ###   ########.fr       */
+/*   Created: 2024/09/11 15:19:51 by aruiz-bl          #+#    #+#             */
+/*   Updated: 2024/10/02 16:54:38 by aruiz-bl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_atoi(const char *nptr)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	long	i;
-	long	solution;
-	long	sign;
+	size_t	src_len;
 
-	i = 0;
-	solution = 0;
-	sign = 1;
-	if (!nptr)
-		return (0);
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == ' ')
-		i++;
-	if (nptr[i] == '-')
+	src_len = ft_strlen(src);
+	if (dstsize > src_len + 1)
+		ft_memcpy(dst, src, src_len + 1);
+	else if (dstsize != 0)
 	{
-		sign = -1;
-		i++;
+		ft_memcpy(dst, src, dstsize - 1);
+		dst[dstsize - 1] = 0;
 	}
-	else if (nptr[i] == '+')
-		i++;
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		solution = 10 * solution + (nptr[i] - '0');
-		i++;
-	}
-	return (solution * sign);
+	return (src_len);
 }

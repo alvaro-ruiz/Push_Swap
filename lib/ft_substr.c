@@ -6,7 +6,7 @@
 /*   By: aruiz-bl <aruiz-bl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 12:04:20 by aruiz-bl          #+#    #+#             */
-/*   Updated: 2024/10/03 14:00:05 by aruiz-bl         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:28:31 by aruiz-bl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,26 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t		i;
-	char		*d;
+	char			*sub_s;
+	size_t			i;
+	unsigned int	s_len;
 
+	i = 0;
 	if (!s)
 		return (NULL);
-	if (start > ft_strlen(s))
+	s_len = (unsigned int)ft_strlen((char *)s);
+	if (start >= s_len)
 		return (ft_strdup(""));
-	if (len > ft_strlen(s) - start)
-	{
-		len = ft_strlen(s) - start;
-	}
-	i = 0;
-	d = (char *) malloc(len + 1);
-	if (d == NULL)
+	if (start + len > s_len)
+		len = s_len - start;
+	sub_s = malloc(len + 1);
+	if (!sub_s)
 		return (NULL);
-	while (i < len)
+	while (i < (unsigned int)len)
 	{
-		d[i] = s[start + i];
+		sub_s[i] = s[start + i];
 		i++;
 	}
-	d[i] = '\0';
-	return (d);
+	sub_s[i] = '\0';
+	return (sub_s);
 }
-
-/*int main ()
-{
-	char a[] = "hola mundo";
-	char *s1;
-
-
-	s1 = ft_substr(a, 0, 4);
-
-	printf("%s", s1);
-}*/
